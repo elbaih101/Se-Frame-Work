@@ -5,7 +5,6 @@ import org.example.enums.Driver_Mode;
 import org.example.enums.Drivers;
 import org.example.tools.DriverManager;
 import org.example.tools.JsonUtils;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,7 +15,6 @@ import java.time.Duration;
 public class Hooks
 {
 
-    WebDriver driver;
     public final static String BaseUrl = JsonUtils.getValueFromJsonFile("src/main/resources/config.json", "BaseUrl");
 
 
@@ -24,8 +22,7 @@ public class Hooks
     public void initialize()
     {
         DriverManager.initializeDriver(Drivers.Chrome, Driver_Mode.UI);
-        driver = DriverManager.getDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+         DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         ;
 
 //        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));

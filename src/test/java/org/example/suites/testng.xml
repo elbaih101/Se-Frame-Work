@@ -13,6 +13,7 @@
         <classes>
             <class name="org.example.TestCases.T01_InventoryItems"/>
         </classes>
+
     </test>
 
 </suite>

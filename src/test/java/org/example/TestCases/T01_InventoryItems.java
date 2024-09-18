@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class T01_InventoryItems extends Hooks
 {
-    WebDriver driver;
+
     P01_Login loginPage;
     P02_Inventory inventory;
     P03_Cart cart;
@@ -32,7 +32,7 @@ public class T01_InventoryItems extends Hooks
     public void initPages()
     {
 
-        driver = DriverManager.getDriver();
+        WebDriver driver = DriverManager.getDriver();
         loginPage = new P01_Login(driver);
         inventory = new P02_Inventory(driver);
         cart = new P03_Cart(driver);

@@ -4,24 +4,24 @@
            failures="0"
            errors="0"
            skipped="0"
-           time="4.050">
+           time="3.981">
     <properties></properties>
 
 
 
             <testcase
-                name="checkItemsTotalsAndSuccessfulCheckOutMessage"
-                time="1.953"
-                classname="org.example.TestCases.T01_InventoryItems">
-            </testcase>
-            <testcase
                 name="checkItemsAddedCorrectlyToCart"
-                time="1.109"
+                time="1.070"
                 classname="org.example.TestCases.T01_InventoryItems">
             </testcase>
             <testcase
                 name="CheckInventorySorting"
-                time="0.988"
+                time="1.046"
+                classname="org.example.TestCases.T01_InventoryItems">
+            </testcase>
+            <testcase
+                name="checkItemsTotalsAndSuccessfulCheckOutMessage"
+                time="1.865"
                 classname="org.example.TestCases.T01_InventoryItems">
             </testcase>
 </testsuite>
