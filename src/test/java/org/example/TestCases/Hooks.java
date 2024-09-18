@@ -5,6 +5,7 @@ import org.example.enums.Driver_Mode;
 import org.example.enums.Drivers;
 import org.example.tools.DriverManager;
 import org.example.tools.JsonUtils;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -12,33 +13,43 @@ import org.testng.annotations.BeforeMethod;
 import java.time.Duration;
 
 
-public class Hooks {
+public class Hooks
+{
 
-
-    public final static String BaseUrl = JsonUtils.getValueFromJsonFile("src/main/resources/config.json","BaseUrl");
+    WebDriver driver;
+    public final static String BaseUrl = JsonUtils.getValueFromJsonFile("src/main/resources/config.json", "BaseUrl");
 
 
     @BeforeMethod
-    public void initialize() {
+    public void initialize()
+    {
         DriverManager.initializeDriver(Drivers.Chrome, Driver_Mode.UI);
-        DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));;
+        driver = DriverManager.getDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        ;
 
 //        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         getUrl();
 
     }
 
-    private void getUrl() {
+    private void getUrl()
+    {
         int count = 3;
-        while (count != 0) {
-            try {
+        while (count != 0)
+        {
+            try
+            {
                 DriverManager.getDriver().get(BaseUrl);
                 break;
-            } catch (WebDriverException e) {
-                if (e.getMessage().contains("ERR_CONNECTION_TIMED_OUT")) {
+            } catch (WebDriverException e)
+            {
+                if (e.getMessage().contains("ERR_CONNECTION_TIMED_OUT"))
+                {
                     getUrl();
                     count--;
-                } else {
+                } else
+                {
                     throw new WebDriverException(e);
                 }
             }
@@ -53,20 +64,19 @@ public class Hooks {
 //    }
 
     @AfterMethod
-    public void tearDown() throws Exception {
+    public void tearDown() throws Exception
+    {
 
-        try {
+        try
+        {
             Thread.sleep(800);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
         DriverManager.quitDriver();
     }
 
 
-
-
-
-
-    }
+}
 

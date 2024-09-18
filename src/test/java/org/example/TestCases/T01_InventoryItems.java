@@ -31,7 +31,8 @@ public class T01_InventoryItems extends Hooks
     @BeforeMethod
     public void initPages()
     {
-        driver= DriverManager.getDriver();
+
+        driver = DriverManager.getDriver();
         loginPage = new P01_Login(driver);
         inventory = new P02_Inventory(driver);
         cart = new P03_Cart(driver);
@@ -55,17 +56,23 @@ public class T01_InventoryItems extends Hooks
     @Test(description = "check items addition in cart is successful")
     public void checkItemsAddedCorrectlyToCart()
     {
-        selectItemsAndNavigateToCart();
+        login();
+        List<Item> selectedItems = inventory.selectItems(3);
+        inventory.navigateToCart();
+        List<Item> cartItems = cart.getCartItems();
+        Assert.assertEquals(selectedItems, cartItems);
+        JsonUtils.writeObjectToJsonFile(Item.json, selectedItems);
+
 
     }
 
     @Test(description = "finalizing the checkout process and checking totals ")
     public void checkItemsTotalsAndSuccessfulCheckOutMessage()
     {
-        selectItemsAndNavigateToCart();
-        List<Item> selectedItems;
+        checkItemsAddedCorrectlyToCart();
+
         CustomAssert asrt = new CustomAssert();
-        selectedItems = List.of(Objects.requireNonNull(JsonUtils.readJsonFromFile(Item.json, Item[].class)));
+        List<Item> selectedItems = List.of(Objects.requireNonNull(JsonUtils.readJsonFromFile(Item.json, Item[].class)));
         inventory.navigateToCart();
         cart.navigateToCheckOut();
         checkOut.fillInfo(faker.name().firstName(), faker.name().lastName(), faker.address().zipCode());
@@ -84,14 +91,5 @@ public class T01_InventoryItems extends Hooks
         asrt.assertEquals(actualSuccessMessage, expectedSuccessMessage);
     }
 
-    private void selectItemsAndNavigateToCart()
-    {
-        login();
-        List<Item> selectedItems = inventory.selectItems(3);
-        inventory.navigateToCart();
-        List<Item> cartItems = cart.getCartItems();
-        Assert.assertEquals(selectedItems, cartItems);
-        JsonUtils.writeObjectToJsonFile(Item.json,selectedItems);
-    }
 
 }
