@@ -16,25 +16,6 @@ public class Utils
 
 
 
-    /**
-     * function to sleep the thread with desired time in millis
-     *
-     * @param milliSeconds time in millis
-     */
-    public static void sleep(int milliSeconds)
-    {
-        try
-        {
-            Thread.sleep(milliSeconds);
-        } catch (InterruptedException e)
-        {
-            //noinspection CallToPrintStackTrace
-            e.printStackTrace();
-        }
-    }
-
-
-
 
 
     public static boolean isSorted(List<String> list, String orderType)
