@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="InventoryTests"
+           tests="3"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="4.066">
+    <properties></properties>
+
+
+
+            <testcase
+                name="CheckInventorySorting"
+                time="0.955"
+                classname="org.example.TestCases.T01_InventoryItems">
+            </testcase>
+            <testcase
+                name="checkItemsTotalsAndSuccessfulCheckOutMessage"
+                time="2.000"
+                classname="org.example.TestCases.T01_InventoryItems">
+            </testcase>
+            <testcase
+                name="checkItemsAddedCorrectlyToCart"
+                time="1.111"
+                classname="org.example.TestCases.T01_InventoryItems">
+            </testcase>
+</testsuite>

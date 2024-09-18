@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="ejada task" parallel="methods" thread-count="3">
+
+    <!-- Hooks class for BeforeTest and AfterTest -->
+<!--    <listeners>-->
+<!--        <listener class-name="org.example.TestCases.Hooks"/>-->
+<!--    </listeners>-->
+
+    <!-- Test definitions -->
+    <test name="InventoryTests">
+        <classes>
+            <class name="org.example.TestCases.T01_InventoryItems"/>
+        </classes>
+    </test>
+
+</suite>
