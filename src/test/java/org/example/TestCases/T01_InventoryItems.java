@@ -66,7 +66,7 @@ public class T01_InventoryItems extends Hooks
 
     }
 
-    @Test(description = "finalizing the checkout process and checking totals ")
+    @Test(description = "finalizing the checkout process and checking totals",dependsOnMethods = {"checkItemsAddedCorrectlyToCart"})
     public void checkItemsTotalsAndSuccessfulCheckOutMessage()
     {
         checkItemsAddedCorrectlyToCart();
