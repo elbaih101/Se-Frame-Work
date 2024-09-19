@@ -42,7 +42,7 @@ public class T01_InventoryItems extends Hooks
     private void login()
     {
         User user = UserDataReader.getNextUser();
-        loginPage.logIn(user.getUserName(), user.getPassword());
+        loginPage.logIn(Objects.requireNonNull(user).getUserName(), user.getPassword());
     }
 
     @Test(description = "Check sorting of inventory from z to a")
