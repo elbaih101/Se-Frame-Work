@@ -89,7 +89,7 @@ public class T01_InventoryItems extends Hooks
         String actualSuccessMessage = checkOut.getConfirmationMessage();
 
         asrt.assertEquals(actualSuccessMessage, expectedSuccessMessage);
-    }
+        asrt.assertAll();   }
 
 
 }
