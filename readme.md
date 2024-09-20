@@ -2,15 +2,13 @@
 
 ---
 
-# POC Workframe Documentation
+# Ejada Task
 
 ## Table of Contents
 
 1. [Maven POM Structure](#maven-pom-structure)
 2. [Custom Web Element Framework](#custom-web-element-framework)
-3. [Parallel Excution](#Parallel-Excution)
-4. [external dependencies](#External-Depencencies)
-5. [Mailing Reports](#E-mailing-Reports)
+
 
 ---
 
