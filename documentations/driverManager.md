@@ -215,7 +215,7 @@ In the `BasePage` and other relevant classes where `DriverManager` is used, you 
 package org.example.templates;
 
 import org.example.utils.CustomAssert;
-import org.example.utils.CustomWebDriverWait;
+import org.example.utils.Waits;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -226,7 +226,7 @@ import java.time.Duration;
 
 public class BasePage {
   public final WebDriver driver;
-  public final CustomWebDriverWait wait;
+  public final Waits wait;
   public final Actions actions;
   public final JavascriptExecutor js;
   public final CustomAssert asrt;
@@ -238,7 +238,7 @@ public class BasePage {
   public BasePage(WebDriver driver) {
     PageFactory.initElements(new CustomFieldDecorator(new DefaultElementLocatorFactory(driver)), this);
     this.driver = driver;
-    wait = new CustomWebDriverWait(driver, Duration.ofSeconds(10));
+    wait = new Waits(driver, Duration.ofSeconds(10));
     actions = new Actions(driver);
     js = (JavascriptExecutor) driver;
     asrt = new CustomAssert();

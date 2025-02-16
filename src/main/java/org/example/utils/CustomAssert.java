@@ -19,7 +19,7 @@ import java.util.function.Predicate;
 public class CustomAssert extends SoftAssert
 {
 
-    CustomWebDriverWait wait = new CustomWebDriverWait(Duration.ofSeconds(10));
+    Waits wait = new Waits(Duration.ofSeconds(10));
 
     /**
      * checks if a string contains another string

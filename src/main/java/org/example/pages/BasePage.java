@@ -3,7 +3,7 @@ package org.example.pages;
 
 import org.example.templates.CustomFieldDecorator;
 import org.example.utils.CustomAssert;
-import org.example.utils.CustomWebDriverWait;
+import org.example.utils.Waits;
 import org.example.utils.LogUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +16,6 @@ import java.time.Duration;
 public class BasePage
 {
    public final WebDriver driver;
-   public final CustomWebDriverWait wait;
    public final Actions actions;
    public final JavascriptExecutor js;
    public final CustomAssert asrt;
@@ -28,7 +27,6 @@ public class BasePage
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new CustomFieldDecorator(new DefaultElementLocatorFactory(driver)), this);
-        wait = new CustomWebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
         js = (JavascriptExecutor) driver;
         asrt = new CustomAssert();

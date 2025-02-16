@@ -1,6 +1,5 @@
 package org.example.pages;
 
-import org.example.utils.LogUtils;
 import org.example.utils.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

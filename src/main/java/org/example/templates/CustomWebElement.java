@@ -1,7 +1,7 @@
 package org.example.templates;
 
 
-import org.example.utils.CustomWebDriverWait;
+import org.example.utils.Waits;
 import org.example.drivers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -49,7 +49,7 @@ public class CustomWebElement
     public void scrollIntoView()
     {
         ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-        new CustomWebDriverWait(Duration.ofMillis(500)).sleep(500);
+        new Waits(Duration.ofMillis(500)).sleep(500);
     }
 
     /**

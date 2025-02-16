@@ -1,7 +1,6 @@
 package org.example.pages;
 
 import org.example.pojos.Item;
-import org.example.utils.LogUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

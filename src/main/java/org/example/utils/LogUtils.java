@@ -5,7 +5,9 @@ import org.apache.logging.log4j.Logger;
 
 public class LogUtils {
 
-
+private LogUtils() {
+super();
+}
 
 
 	public static Logger logger(){
