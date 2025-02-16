@@ -1,8 +1,8 @@
 package org.example.templates;
 
 
-import org.example.tools.CustomWebDriverWait;
-import org.example.tools.DriverManager;
+import org.example.utils.CustomWebDriverWait;
+import org.example.drivers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;

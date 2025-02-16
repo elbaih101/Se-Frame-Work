@@ -1,5 +1,6 @@
-package org.example.tools;
+package org.example.utils;
 
+import org.example.drivers.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.WebDriverWait;

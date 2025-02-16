@@ -1,8 +1,10 @@
-package org.example.templates;
+package org.example.pages;
 
 
-import org.example.tools.CustomAssert;
-import org.example.tools.CustomWebDriverWait;
+import org.example.templates.CustomFieldDecorator;
+import org.example.utils.CustomAssert;
+import org.example.utils.CustomWebDriverWait;
+import org.example.utils.LogUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -30,5 +32,7 @@ public class BasePage
         actions = new Actions(driver);
         js = (JavascriptExecutor) driver;
         asrt = new CustomAssert();
+        LogUtils.logInfo("instantiated  page",this.getClass().getName());
+
     }
 }

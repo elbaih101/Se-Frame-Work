@@ -1,7 +1,7 @@
 package org.example.pages;
 
-import org.example.templates.BasePage;
-import org.example.tools.Utils;
+import org.example.utils.LogUtils;
+import org.example.utils.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

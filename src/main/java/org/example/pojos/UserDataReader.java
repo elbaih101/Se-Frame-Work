@@ -1,7 +1,7 @@
 package org.example.pojos;
 
 
-import org.example.tools.JsonUtils;
+import org.example.utils.JsonUtils;
 
 /**
  * responsible for managing sessions users on the parralel grand scheme of things

@@ -1,6 +1,7 @@
 package org.example.TestCases;
 
-import com.github.javafaker.Faker;
+
+import io.github.serpro69.kfaker.Faker;
 import org.example.pages.P01_Login;
 import org.example.pages.P02_Inventory;
 import org.example.pages.P03_Cart;
@@ -8,9 +9,9 @@ import org.example.pages.P04_CheckOut;
 import org.example.pojos.Item;
 import org.example.pojos.User;
 import org.example.pojos.UserDataReader;
-import org.example.tools.CustomAssert;
-import org.example.tools.DriverManager;
-import org.example.tools.JsonUtils;
+import org.example.utils.CustomAssert;
+import org.example.drivers.DriverManager;
+import org.example.utils.JsonUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -75,7 +76,7 @@ public class T01_InventoryItems extends Hooks
         List<Item> selectedItems = List.of(Objects.requireNonNull(JsonUtils.readJsonFromFile(Item.json, Item[].class)));
         inventory.navigateToCart();
         cart.navigateToCheckOut();
-        checkOut.fillInfo(faker.name().firstName(), faker.name().lastName(), faker.address().zipCode());
+        checkOut.fillInfo(faker.getName().firstName(), faker.getName().lastName(), faker.getAddress().postcode());
         checkOut.continueCheckOut();
         float expectedItemsTotalPrice = 0;
         float actualItemsTotalPrice = checkOut.getItemsTotalPrice();

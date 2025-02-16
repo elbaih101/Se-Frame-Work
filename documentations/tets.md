@@ -16,7 +16,7 @@ This package includes test cases for verifying various features of the applicati
 - **`com.github.javafaker.Faker`**: Used to generate fake user data for testing purposes, such as names and addresses.
 - **`org.example.pages.P01_Login`, `P02_Inventory`, `P03_Cart`, `P04_CheckOut`**: These are the page object model (POM) classes representing different pages of the application (Login, Inventory, Cart, and Checkout pages).
 - **`org.example.pojos.Item`, `User`, `UserDataReader`**: POJOs (Plain Old Java Objects) representing entities in the application. `UserDataReader` is used to read test user data.
-- **`org.example.tools.CustomAssert`, `DriverManager`, `JsonUtils`**: Custom utilities for driver management, assertions, and JSON file handling.
+- **`org.example.utils.CustomAssert`, `DriverManager`, `JsonUtils`**: Custom utilities for driver management, assertions, and JSON file handling.
 - **`org.openqa.selenium.WebDriver`**: Selenium WebDriver to interact with the browser for UI testing.
 - **`org.testng.Assert`, `org.testng.annotations.BeforeMethod`, `org.testng.annotations.Test`**: TestNG framework annotations and assertions for structuring and running test cases.
 

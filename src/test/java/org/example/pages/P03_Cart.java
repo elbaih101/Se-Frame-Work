@@ -1,7 +1,7 @@
 package org.example.pages;
 
 import org.example.pojos.Item;
-import org.example.templates.BasePage;
+import org.example.utils.LogUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +20,7 @@ public class P03_Cart extends BasePage
     public P03_Cart(WebDriver driver)
     {
         super(driver);
+
     }
 
     @FindBy(className = "cart_item")

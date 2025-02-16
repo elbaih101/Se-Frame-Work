@@ -1,10 +1,10 @@
 package org.example.TestCases;
 
 
-import org.example.enums.Driver_Mode;
-import org.example.enums.Drivers;
-import org.example.tools.DriverManager;
-import org.example.tools.JsonUtils;
+import org.example.drivers.Driver_Mode;
+import org.example.drivers.Drivers;
+import org.example.drivers.DriverManager;
+import org.example.utils.JsonUtils;
 import org.openqa.selenium.WebDriverException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,9 +21,8 @@ public class Hooks
     @BeforeMethod
     public void initialize()
     {
-        DriverManager.initializeDriver(Drivers.Chrome, Driver_Mode.UI);
+        DriverManager.initializeDriver(Drivers.Chrome, Driver_Mode.Headless);
          DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        ;
 
 //        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         getUrl();

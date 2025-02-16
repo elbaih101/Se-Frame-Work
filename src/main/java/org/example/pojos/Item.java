@@ -1,6 +1,6 @@
 package org.example.pojos;
 
-import org.example.tools.JsonUtils;
+import org.example.utils.JsonUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

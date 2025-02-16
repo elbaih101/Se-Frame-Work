@@ -1,9 +1,7 @@
-package org.example.tools;
+package org.example.drivers;
 
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.example.enums.Driver_Mode;
-import org.example.enums.Drivers;
+
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
@@ -63,12 +61,12 @@ public class DriverManager {
 		WebDriver driver;
 		switch (driverName) {
 			case Chrome -> {
-//				WebDriverManager.chromedriver().setup();
+//
 				ChromeOptions op = getChromeOptions(mode);
 				driver = new ChromeDriver(op);
 			}
 			case Edge -> {
-				WebDriverManager.edgedriver().setup();
+
 				EdgeOptions op = new EdgeOptions();
 				op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests", "--guest");
 				if (mode.equals(Driver_Mode.Headless))
@@ -76,7 +74,7 @@ public class DriverManager {
 				driver = new EdgeDriver(op);
 			}
 			case FireFox -> {
-				WebDriverManager.firefoxdriver().setup();
+
 				FirefoxOptions op = new FirefoxOptions();
 				op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests", "--guest");
 				if (mode.equals(Driver_Mode.Headless))
@@ -84,7 +82,7 @@ public class DriverManager {
 				driver = new FirefoxDriver(op);
 			}
 			case Safari -> {
-				WebDriverManager.safaridriver().setup();
+
 				SafariOptions op = new SafariOptions();
 				driver = new SafariDriver(op);
 			}

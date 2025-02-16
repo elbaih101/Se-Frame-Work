@@ -1,4 +1,4 @@
-package org.example.enums;
+package org.example.drivers;
 
 public enum Driver_Mode {
     Headless,

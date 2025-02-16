@@ -2,8 +2,8 @@ package org.example.pages;
 
 import org.example.custom_elements.SelectElement;
 import org.example.pojos.Item;
-import org.example.templates.BasePage;
-import org.example.tools.Utils;
+import org.example.utils.LogUtils;
+import org.example.utils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +22,7 @@ public class P02_Inventory extends BasePage
     public P02_Inventory(WebDriver driver)
     {
         super(driver);
+
     }
 
     @FindBy(className = "shopping_cart_link")

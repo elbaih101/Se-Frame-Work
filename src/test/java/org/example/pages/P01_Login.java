@@ -1,6 +1,6 @@
 package org.example.pages;
 
-import org.example.templates.BasePage;
+import org.example.utils.LogUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +16,7 @@ public class P01_Login extends BasePage
     public P01_Login(WebDriver driver)
     {
         super(driver);
+
     }
 
     @FindBy(id="user-name")
@@ -26,6 +27,8 @@ public class P01_Login extends BasePage
 
     @FindBy(id="login-button")
     private WebElement loginButton;
+
+
 
 
     public void logIn(String userName,String password){

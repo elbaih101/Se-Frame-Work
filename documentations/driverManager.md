@@ -67,10 +67,10 @@ Returns pre-configured `EdgeOptions` for printing and download settings specific
 ## Code Example
 
 ```java
-package org.example.tools;
+package org.example.utils;
 
-import org.example.enums.Driver_Mode;
-import org.example.enums.Drivers;
+import org.example.drivers.Driver_Mode;
+import org.example.drivers.Drivers;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.PageLoadStrategy;
@@ -90,118 +90,118 @@ import java.util.HashMap;
  * DriverManager handles WebDriver instances for parallel execution.
  */
 public class DriverManager {
-    private static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
+  private static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
-    /**
-     * Retrieves the thread-local WebDriver.
-     * @return WebDriver the local Thread WebDriver
-     */
-    public static WebDriver getDriver() {
-        return driverThreadLocal.get();
+  /**
+   * Retrieves the thread-local WebDriver.
+   * @return WebDriver the local Thread WebDriver
+   */
+  public static WebDriver getDriver() {
+    return driverThreadLocal.get();
+  }
+
+  /**
+   * Stores the WebDriver in the thread-local reference.
+   * @param driver WebDriver to store in the thread
+   */
+  public static void setDriver(WebDriver driver) {
+    driverThreadLocal.set(driver);
+  }
+
+  /**
+   * Quits the WebDriver and removes it from thread-local storage.
+   */
+  public static void quitDriver() {
+    WebDriver driver = getDriver();
+    if (driver != null) {
+      driver.quit();
+      driverThreadLocal.remove();
+    }
+  }
+
+  /**
+   * Initializes a WebDriver instance of the specified type and mode.
+   * @param driverName The type of WebDriver to initialize
+   * @param mode The mode of the WebDriver (e.g., headless)
+   */
+  public static void initializeDriver(Drivers driverName, Driver_Mode mode) {
+    WebDriver driver;
+    switch (driverName) {
+      case Chrome -> {
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions op = new ChromeOptions();
+        op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests");
+        if (mode.equals(Driver_Mode.Headless))
+          op.addArguments("headless");
+        op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        driver = new ChromeDriver(op);
+      }
+      case Edge -> {
+        WebDriverManager.edgedriver().setup();
+        EdgeOptions op = new EdgeOptions();
+        op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests", "--guest");
+        if (mode.equals(Driver_Mode.Headless))
+          op.addArguments("headless");
+        driver = new EdgeDriver(op);
+      }
+      case FireFox -> {
+        WebDriverManager.firefoxdriver().setup();
+        FirefoxOptions op = new FirefoxOptions();
+        op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests", "--guest");
+        if (mode.equals(Driver_Mode.Headless))
+          op.addArguments("headless");
+        driver = new FirefoxDriver(op);
+      }
+      case Safari -> {
+        WebDriverManager.safaridriver().setup();
+        SafariOptions op = new SafariOptions();
+        driver = new SafariDriver(op);
+      }
+      default -> throw new IllegalStateException("Unexpected value: " + driverName);
+    }
+    driver.manage().window().setSize(new Dimension(1920, 1080));
+    setDriver(driver);
+  }
+
+  /**
+   * Gets the WebDriver type.
+   * @param driver The WebDriver instance
+   * @return The WebDriver type
+   */
+  public static Drivers getWebDriverType(WebDriver driver) {
+    Drivers driverType = null;
+
+    if (driver instanceof ChromeDriver) {
+      driverType = Drivers.Chrome;
+    } else if (driver instanceof EdgeDriver) {
+      driverType = Drivers.Edge;
+    } else if (driver instanceof FirefoxDriver) {
+      driverType = Drivers.FireFox;
+    } else if (driver instanceof SafariDriver) {
+      driverType = Drivers.Safari;
     }
 
-    /**
-     * Stores the WebDriver in the thread-local reference.
-     * @param driver WebDriver to store in the thread
-     */
-    public static void setDriver(WebDriver driver) {
-        driverThreadLocal.set(driver);
-    }
+    return driverType;
+  }
 
-    /**
-     * Quits the WebDriver and removes it from thread-local storage.
-     */
-    public static void quitDriver() {
-        WebDriver driver = getDriver();
-        if (driver != null) {
-            driver.quit();
-            driverThreadLocal.remove();
-        }
-    }
+  /**
+   * Returns pre-configured EdgeOptions for printing and download settings.
+   * @return EdgeOptions with pre-configured settings
+   */
+  public static EdgeOptions edgePrintingAndDownloadOptions() {
+    EdgeOptions options = new EdgeOptions();
+    options.setExperimentalOption("prefs", new String[]{"download.default_directory", "download_path"});
 
-    /**
-     * Initializes a WebDriver instance of the specified type and mode.
-     * @param driverName The type of WebDriver to initialize
-     * @param mode The mode of the WebDriver (e.g., headless)
-     */
-    public static void initializeDriver(Drivers driverName, Driver_Mode mode) {
-        WebDriver driver;
-        switch (driverName) {
-            case Chrome -> {
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions op = new ChromeOptions();
-                op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests");
-                if (mode.equals(Driver_Mode.Headless))
-                    op.addArguments("headless");
-                op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-                driver = new ChromeDriver(op);
-            }
-            case Edge -> {
-                WebDriverManager.edgedriver().setup();
-                EdgeOptions op = new EdgeOptions();
-                op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests", "--guest");
-                if (mode.equals(Driver_Mode.Headless))
-                    op.addArguments("headless");
-                driver = new EdgeDriver(op);
-            }
-            case FireFox -> {
-                WebDriverManager.firefoxdriver().setup();
-                FirefoxOptions op = new FirefoxOptions();
-                op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests", "--guest");
-                if (mode.equals(Driver_Mode.Headless))
-                    op.addArguments("headless");
-                driver = new FirefoxDriver(op);
-            }
-            case Safari -> {
-                WebDriverManager.safaridriver().setup();
-                SafariOptions op = new SafariOptions();
-                driver = new SafariDriver(op);
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + driverName);
-        }
-        driver.manage().window().setSize(new Dimension(1920, 1080));
-        setDriver(driver);
-    }
+    // Printer config
+    options.addArguments("--kiosk-printing");
 
-    /**
-     * Gets the WebDriver type.
-     * @param driver The WebDriver instance
-     * @return The WebDriver type
-     */
-    public static Drivers getWebDriverType(WebDriver driver) {
-        Drivers driverType = null;
-
-        if (driver instanceof ChromeDriver) {
-            driverType = Drivers.Chrome;
-        } else if (driver instanceof EdgeDriver) {
-            driverType = Drivers.Edge;
-        } else if (driver instanceof FirefoxDriver) {
-            driverType = Drivers.FireFox;
-        } else if (driver instanceof SafariDriver) {
-            driverType = Drivers.Safari;
-        }
-
-        return driverType;
-    }
-
-    /**
-     * Returns pre-configured EdgeOptions for printing and download settings.
-     * @return EdgeOptions with pre-configured settings
-     */
-    public static EdgeOptions edgePrintingAndDownloadOptions() {
-        EdgeOptions options = new EdgeOptions();
-        options.setExperimentalOption("prefs", new String[]{"download.default_directory", "download_path"});
-
-        // Printer config
-        options.addArguments("--kiosk-printing");
-
-        // Download config
-        HashMap<String, Object> edgePrefs = new HashMap<>();
-        edgePrefs.put("download.default_directory", "F:\\java maven projects\\Nazeel-Project\\src\\main\\resources\\downloaded");
-        options.setExperimentalOption("prefs", edgePrefs);
-        options.addArguments("print.printer_Microsoft_Print_to_PDF.print_to_filename", "F:\\java maven projects\\Nazeel-Project\\src\\main\\resources\\downloaded");
-        return options;
-    }
+    // Download config
+    HashMap<String, Object> edgePrefs = new HashMap<>();
+    edgePrefs.put("download.default_directory", "F:\\java maven projects\\Nazeel-Project\\src\\main\\resources\\downloaded");
+    options.setExperimentalOption("prefs", edgePrefs);
+    options.addArguments("print.printer_Microsoft_Print_to_PDF.print_to_filename", "F:\\java maven projects\\Nazeel-Project\\src\\main\\resources\\downloaded");
+    return options;
+  }
 }
 ```
 
@@ -214,9 +214,8 @@ In the `BasePage` and other relevant classes where `DriverManager` is used, you 
 ```java
 package org.example.templates;
 
-import org.example.tools.DriverManager; // Add this import
-import org.example.tools.CustomAssert;
-import org.example.tools.CustomWebDriverWait;
+import org.example.utils.CustomAssert;
+import org.example.utils.CustomWebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -225,26 +224,25 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 import java.time.Duration;
 
-public class BasePage
-{
-   public final WebDriver driver;
-   public final CustomWebDriverWait wait;
-   public final Actions actions;
-   public final JavascriptExecutor js;
-   public final CustomAssert asrt;
+public class BasePage {
+  public final WebDriver driver;
+  public final CustomWebDriverWait wait;
+  public final Actions actions;
+  public final JavascriptExecutor js;
+  public final CustomAssert asrt;
 
-    /**
-     * Initiates the pages using the custom field decorator factory
-     * @param driver WebDriver to initialize PageFactory
-     */
-    public BasePage(WebDriver driver) {
-        PageFactory.initElements(new CustomFieldDecorator(new DefaultElementLocatorFactory(driver)), this);
-        this.driver = driver;
-        wait = new CustomWebDriverWait(driver, Duration.ofSeconds(10));
-        actions = new Actions(driver);
-        js = (JavascriptExecutor) driver;
-        asrt = new CustomAssert();
-    }
+  /**
+   * Initiates the pages using the custom field decorator factory
+   * @param driver WebDriver to initialize PageFactory
+   */
+  public BasePage(WebDriver driver) {
+    PageFactory.initElements(new CustomFieldDecorator(new DefaultElementLocatorFactory(driver)), this);
+    this.driver = driver;
+    wait = new CustomWebDriverWait(driver, Duration.ofSeconds(10));
+    actions = new Actions(driver);
+    js = (JavascriptExecutor) driver;
+    asrt = new CustomAssert();
+  }
 }
 ```
 

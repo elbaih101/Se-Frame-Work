@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="InventoryTests"
-           tests="3"
+<testsuite name="ejadaTask"
+           tests="2"
            failures="0"
            errors="0"
            skipped="0"
-           time="3.981">
+           time="2.058">
     <properties></properties>
 
 
 
             <testcase
                 name="checkItemsAddedCorrectlyToCart"
-                time="1.070"
-                classname="org.example.TestCases.T01_InventoryItems">
-            </testcase>
-            <testcase
-                name="CheckInventorySorting"
-                time="1.046"
+                time="0.786"
                 classname="org.example.TestCases.T01_InventoryItems">
             </testcase>
             <testcase
                 name="checkItemsTotalsAndSuccessfulCheckOutMessage"
-                time="1.865"
+                time="1.272"
                 classname="org.example.TestCases.T01_InventoryItems">
             </testcase>
 </testsuite>
