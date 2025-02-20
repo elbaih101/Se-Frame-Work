@@ -1,9 +1,11 @@
 package org.example.TestCases;
 
 
+import io.qameta.allure.Step;
 import org.example.drivers.Driver_Mode;
 import org.example.drivers.Drivers;
 import org.example.drivers.DriverManager;
+import org.example.utils.BrowsersActions;
 import org.example.utils.JsonUtils;
 import org.openqa.selenium.WebDriverException;
 import org.testng.annotations.AfterMethod;
@@ -18,39 +20,16 @@ public class Hooks
     public final static String BaseUrl = JsonUtils.getValueFromJsonFile("src/main/resources/config.json", "BaseUrl");
 
 
-    @BeforeMethod
+    @BeforeMethod @Step("Opening the browser")
     public void initialize()
     {
         DriverManager.initializeDriver(Drivers.Chrome, Driver_Mode.Headless);
-         DriverManager.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-//        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        getUrl();
+//       driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 
     }
 
-    private void getUrl()
-    {
-        int count = 3;
-        while (count != 0)
-        {
-            try
-            {
-                DriverManager.getDriver().get(BaseUrl);
-                break;
-            } catch (WebDriverException e)
-            {
-                if (e.getMessage().contains("ERR_CONNECTION_TIMED_OUT"))
-                {
-                    getUrl();
-                    count--;
-                } else
-                {
-                    throw new WebDriverException(e);
-                }
-            }
-        }
-    }
+
 
 //    @BeforeTest()
 //    public void runPostManCollection() {
@@ -59,17 +38,9 @@ public class Hooks
 //
 //    }
 
-    @AfterMethod
+    @AfterMethod @Step("Closing the browser")
     public void tearDown() throws Exception
     {
-
-        try
-        {
-            Thread.sleep(800);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
         DriverManager.quitDriver();
     }
 

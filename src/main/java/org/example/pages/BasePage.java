@@ -1,7 +1,7 @@
 package org.example.pages;
 
 
-import org.example.templates.CustomFieldDecorator;
+
 import org.example.utils.CustomAssert;
 import org.example.utils.Waits;
 import org.example.utils.LogUtils;
@@ -26,7 +26,7 @@ public class BasePage
      */
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(new CustomFieldDecorator(new DefaultElementLocatorFactory(driver)), this);
+        PageFactory.initElements(new DefaultElementLocatorFactory(driver), this);
         actions = new Actions(driver);
         js = (JavascriptExecutor) driver;
         asrt = new CustomAssert();

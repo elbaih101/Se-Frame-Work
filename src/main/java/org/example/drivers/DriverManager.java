@@ -67,18 +67,13 @@ public class DriverManager {
 			}
 			case Edge -> {
 
-				EdgeOptions op = new EdgeOptions();
-				op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests", "--guest");
-				if (mode.equals(Driver_Mode.Headless))
-					op.addArguments("headless");
+				EdgeOptions op = getEdgeOptions(mode);
 				driver = new EdgeDriver(op);
+
 			}
 			case FireFox -> {
 
-				FirefoxOptions op = new FirefoxOptions();
-				op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests", "--guest");
-				if (mode.equals(Driver_Mode.Headless))
-					op.addArguments("headless");
+				FirefoxOptions op = getFirefoxOptions(mode);
 				driver = new FirefoxDriver(op);
 			}
 			case Safari -> {
@@ -92,6 +87,23 @@ public class DriverManager {
 		setDriver(driver);
 
 
+	}
+
+	private static FirefoxOptions getFirefoxOptions(Driver_Mode mode) {
+		FirefoxOptions op = new FirefoxOptions();
+		op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests", "--guest");
+		if (mode.equals(Driver_Mode.Headless))
+			op.addArguments("headless");
+		return op;
+	}
+
+	private static EdgeOptions getEdgeOptions(Driver_Mode mode) {
+		EdgeOptions op = new EdgeOptions();
+		op.addArguments("start-maximized", "--ignore-certificate-errors", "--ignore-urlfetcher-cert-requests", "--guest");
+		op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+		if (mode.equals(Driver_Mode.Headless))
+			op.addArguments("headless");
+		return op;
 	}
 
 	private static ChromeOptions getChromeOptions(Driver_Mode mode) {

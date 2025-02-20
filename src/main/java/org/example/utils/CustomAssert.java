@@ -19,7 +19,7 @@ import java.util.function.Predicate;
 public class CustomAssert extends SoftAssert
 {
 
-    Waits wait = new Waits(Duration.ofSeconds(10));
+
 
     /**
      * checks if a string contains another string
@@ -111,28 +111,6 @@ public class CustomAssert extends SoftAssert
         assertTrue(a.stream().noneMatch(condition), msg);
     }
 
-    public void AssertToastMessagesContains(String mesage)
-    {
-        List<WebElement> toastMsgs = DriverManager.getDriver().findElements(By.className("toast-message"));
-        wait.until(ExpectedConditions.visibilityOfAllElements(toastMsgs));
-        List<String> mesagesContents = new ArrayList<>();
-        for (WebElement toast : toastMsgs)
-        {
 
-            if (toast.getText().trim().toLowerCase().contains(mesage.toLowerCase()))
-            {
-                this.assertTrue(true);
-                return;
-            } else
-            {
-                mesagesContents.add(toast.getText());
-            }
-
-        }
-        if (!mesagesContents.isEmpty())
-            //noinspection DataFlowIssue
-            this.assertFalse(true, "actual : " + Arrays.toString(mesagesContents.toArray()) + "\nExpected : " + mesage.toLowerCase() + "\n");
-
-    }
 
 }

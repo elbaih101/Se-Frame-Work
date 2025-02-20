@@ -9,9 +9,11 @@ import org.example.pages.P04_CheckOut;
 import org.example.pojos.Item;
 import org.example.pojos.User;
 import org.example.pojos.UserDataReader;
+import org.example.utils.BrowsersActions;
 import org.example.utils.CustomAssert;
 import org.example.drivers.DriverManager;
 import org.example.utils.JsonUtils;
+import org.example.utils.Validations;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -31,7 +33,7 @@ public class T01_InventoryItems extends Hooks {
 
 	@BeforeMethod
 	public void initPages() {
-
+		BrowsersActions.navigateToUrl(BaseUrl);
 
 	}
 
@@ -40,23 +42,19 @@ public class T01_InventoryItems extends Hooks {
 	public void CheckInventorySorting() {
 		new P01_Login(DriverManager.getDriver()).enterUSerName(user.getUserName())
 				.enterPassword(user.getPassword())
-				.logIn(user.getUserName(), user.getPassword());
-		new P02_Inventory(DriverManager.getDriver()).sortInventory("za").sortInventory("za");
-
+				.clickLoginButton();
+		new P02_Inventory(DriverManager.getDriver()).sortInventory("za").assertItemsOrder("za");
 	}
 
 	@Test(description = "check items addition in cart is successful")
 	public void checkItemsAddedCorrectlyToCart() {
 		new P01_Login(DriverManager.getDriver()).enterUSerName(user.getUserName())
 				.enterPassword(user.getPassword())
-				.logIn(user.getUserName(), user.getPassword());
+				.clickLoginButton();
 
 		List<Item> selectedItems = inventory.selectItems(3);
-		inventory.navigateToCart();
-		List<Item> cartItems = cart.getCartItems();
-		Assert.assertEquals(selectedItems, cartItems);
-		JsonUtils.writeObjectToJsonFile(Item.json, selectedItems);
 
+		inventory.navigateToCart().validateItems(selectedItems);
 
 	}
 
